@@ -20,3 +20,27 @@ if (navToggle && navMenu) {
     }
   });
 }
+
+const scrollTopBtn = document.querySelector('.scroll-top');
+
+if (scrollTopBtn) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const toggleScrollButton = () => {
+    if (window.scrollY > 320) {
+      scrollTopBtn.classList.add('is-visible');
+    } else {
+      scrollTopBtn.classList.remove('is-visible');
+    }
+  };
+
+  toggleScrollButton();
+  window.addEventListener('scroll', toggleScrollButton, { passive: true });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+  });
+}
